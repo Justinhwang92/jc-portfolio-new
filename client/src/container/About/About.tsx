@@ -1,33 +1,29 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 
 import './About.scss';
-import { images } from '../../constants';
+import { urlFor, client } from '../../client';
+
+// type definition for about data
+type AboutType = {
+  title: string;
+  description: string;
+  imgUrl: string;
+};
+
+// get image url as string and create
 
 export default function About() {
   // contents for about section
-  const abouts = [
-    {
-      title: 'Web development',
-      description: 'I am a web developer',
-      imgUrl: images.about01,
-    },
-    {
-      title: 'Frontend',
-      description: 'I am a web developer',
-      imgUrl: images.about02,
-    },
-    {
-      title: 'Backend',
-      description: 'I am a web developer',
-      imgUrl: images.about03,
-    },
-    {
-      title: 'MERN Stack',
-      description: 'I am a web developer',
-      imgUrl: images.about04,
-    },
-  ];
+  const [abouts, setAbouts] = useState<AboutType[]>();
+
+  useEffect(() => {
+    const query = '*[_type == "abouts"]'; // query for abouts
+    client.fetch(query).then((data) => {
+      // fetch data from sanity
+      setAbouts(data);
+    });
+  }, []);
   return (
     <>
       <h2 className="head-text">
@@ -36,7 +32,7 @@ export default function About() {
       </h2>
       {/* Mapping over the about content */}
       <div className="app__profiles">
-        {abouts.map((about, index) => (
+        {abouts?.map((about: AboutType, index) => (
           <motion.div
             whileInView={{ opacity: 1 }}
             whileHover={{ scale: 1.1 }}
@@ -44,7 +40,7 @@ export default function About() {
             className="app__profile-item"
             key={about.title + index}
           >
-            <img src={about.imgUrl} alt={about.title} />
+            <img src={urlFor(about.imgUrl)} alt={about.title} />
             <h2 className="bold-text" style={{ marginTop: 20 }}>
               {about.title}
             </h2>
