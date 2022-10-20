@@ -10,6 +10,7 @@ export default function App() {
       <Navbar />
       <AppWrap component={Header} idName="home" />
       <AppWrap component={About} idName="about" />
+      <AppWrap component={Work} idName="work" />
       {/* <Work />
       <Skills />
       <Testimonial />
