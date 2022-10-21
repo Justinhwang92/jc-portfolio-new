@@ -11,10 +11,10 @@ export default function App() {
       <AppWrap component={Header} idName="home" />
       <AppWrap component={About} idName="about" />
       <AppWrap component={Work} idName="work" />
-      {/* <Work />
-      <Skills />
-      <Testimonial />
-      <Footer /> */}
+      <AppWrap component={Skills} idName="skills" />
+      {/* <Skills /> */}
+      {/* <Testimonial /> */}
+      {/* <Footer /> */}
     </div>
   );
 }
