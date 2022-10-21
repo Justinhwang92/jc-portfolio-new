@@ -8,10 +8,30 @@ export default function App() {
   return (
     <div className="app">
       <Navbar />
-      <AppWrap component={Header} idName="home" />
-      <AppWrap component={About} idName="about" />
-      <AppWrap component={Work} idName="work" />
-      <AppWrap component={Skills} idName="skills" />
+      <AppWrap
+        component={Header}
+        idName="home"
+        bgClassName={''}
+        motionClassNames={''}
+      />
+      <AppWrap
+        component={About}
+        idName="about"
+        bgClassName="app__whitebg"
+        motionClassNames="app__about"
+      />
+      <AppWrap
+        component={Work}
+        idName="work"
+        bgClassName="app__primarybg"
+        motionClassNames="app__works"
+      />
+      <AppWrap
+        component={Skills}
+        idName="skills"
+        bgClassName="app__whitebg"
+        motionClassNames="app__skills"
+      />
       {/* <Skills /> */}
       {/* <Testimonial /> */}
       {/* <Footer /> */}
