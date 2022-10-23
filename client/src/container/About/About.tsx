@@ -5,8 +5,15 @@ import './About.scss';
 import { urlFor, client } from '../../client';
 
 // type definition for about and education data
-type dataType = {
+type AboutType = {
   title: string;
+  description: string;
+  imgUrl: string;
+};
+
+type EducationType = {
+  title: string;
+  year: string;
   description: string;
   imgUrl: string;
 };
@@ -15,9 +22,9 @@ type dataType = {
 
 export default function About() {
   // contents for about section
-  const [abouts, setAbouts] = useState<dataType[]>();
+  const [abouts, setAbouts] = useState<AboutType[]>();
   // contents for education section
-  const [educations, setEducations] = useState<dataType[]>();
+  const [educations, setEducations] = useState<EducationType[]>();
 
   useEffect(() => {
     const aboutQuery = '*[_type == "abouts"]'; // query for about section
@@ -42,7 +49,7 @@ export default function About() {
       </h2>
       {/* Mapping over the about content */}
       <div className="app__profiles">
-        {abouts?.map((about: dataType, index) => (
+        {abouts?.map((about: AboutType, index) => (
           <motion.div
             whileInView={{ opacity: 1 }}
             whileHover={{ scale: 1.1 }}
@@ -66,7 +73,7 @@ export default function About() {
       </h2>
       {/* Mapping over the Education content */}
       <div className="app__profiles">
-        {educations?.map((education: dataType, index) => (
+        {educations?.map((education: EducationType, index) => (
           <motion.div
             whileInView={{ opacity: 1 }}
             whileHover={{ scale: 1.1 }}
@@ -78,7 +85,10 @@ export default function About() {
             <h2 className="bold-text" style={{ marginTop: 20 }}>
               {education.title}
             </h2>
-            <p className="p-text" style={{ marginTop: 10 }}>
+            <p className="p-text" style={{ marginTop: 3 }}>
+              {education.year}
+            </p>
+            <p className="p-text" style={{ marginTop: 5 }}>
               {education.description}
             </p>
           </motion.div>
