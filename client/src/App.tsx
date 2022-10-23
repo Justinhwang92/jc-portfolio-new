@@ -32,7 +32,12 @@ export default function App() {
         bgClassName="app__whitebg"
         motionClassNames="app__skills"
       />
-      {/* <Skills /> */}
+      <AppWrap
+        component={Testimonial}
+        idName="testimonial"
+        bgClassName="app__primarybg"
+        motionClassNames="app__testimonial"
+      />
       {/* <Testimonial /> */}
       {/* <Footer /> */}
     </div>
