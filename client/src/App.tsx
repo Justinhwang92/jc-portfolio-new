@@ -38,8 +38,12 @@ export default function App() {
         bgClassName="app__primarybg"
         motionClassNames="app__testimonial"
       />
-      {/* <Testimonial /> */}
-      {/* <Footer /> */}
+      <AppWrap
+        component={Footer}
+        idName="contact"
+        bgClassName="app__whitebg"
+        motionClassNames="app__footer"
+      />
     </div>
   );
 }
