@@ -22,13 +22,13 @@ export default function App() {
       />
       <AppWrap
         component={Work}
-        idName="work"
+        idName="project"
         bgClassName="app__primarybg"
         motionClassNames="app__works"
       />
       <AppWrap
         component={Skills}
-        idName="skills"
+        idName="experience"
         bgClassName="app__whitebg"
         motionClassNames="app__skills"
       />
