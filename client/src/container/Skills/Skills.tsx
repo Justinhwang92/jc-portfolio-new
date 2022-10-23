@@ -26,7 +26,7 @@ export default function Skills() {
 
     // Fetch experience data from Sanity
     client.fetch(experienceQuery).then((data: Experience[]) => {
-      setExperiences(data);
+      setExperiences(data.sort((a, b) => b.year - a.year));
     });
 
     // Fetch skill data from Sanity
