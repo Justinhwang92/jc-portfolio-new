@@ -8,7 +8,7 @@ type ActiveProp = {
 export default function NavigationDots(prop: ActiveProp) {
   return (
     <div className="app__navigation">
-      {['home', 'about', 'work', 'skills', 'testimonial', 'contact'].map(
+      {['home', 'about', 'project', 'experience', 'testimonial', 'contact'].map(
         (item, index) => (
           <a
             href={`#${item}`}
