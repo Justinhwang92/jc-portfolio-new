@@ -15,12 +15,12 @@ export default function About() {
     const aboutQuery = '*[_type == "abouts"]'; // query for about section
     const educationQuery = '*[_type == "educations"]'; // query for education section
 
-    client.fetch(aboutQuery).then((data) => {
+    client.fetch(aboutQuery).then((data: IAbout[]) => {
       // fetch data from sanity
       setAbouts(data);
     });
 
-    client.fetch(educationQuery).then((data) => {
+    client.fetch(educationQuery).then((data: IEducation[]) => {
       // fetch data from sanity
       setEducations(data);
     });
@@ -34,7 +34,7 @@ export default function About() {
       </h2>
       {/* Mapping over the about content */}
       <div className="app__profiles">
-        {abouts?.map((about: IAbout, index) => (
+        {abouts?.map((about: IAbout) => (
           <motion.div
             whileInView={{ opacity: 1 }}
             whileHover={{ scale: 1.1 }}
@@ -58,7 +58,7 @@ export default function About() {
       </h2>
       {/* Mapping over the Education content */}
       <div className="app__profiles">
-        {educations?.map((education: IEducation, index) => (
+        {educations?.map((education: IEducation) => (
           <motion.div
             whileInView={{ opacity: 1 }}
             whileHover={{ scale: 1.1 }}
