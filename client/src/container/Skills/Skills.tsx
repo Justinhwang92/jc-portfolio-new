@@ -36,7 +36,6 @@ export default function Skills() {
       setSkills(data);
     });
   }, []);
-  console.log(skills);
 
   return (
     <>
