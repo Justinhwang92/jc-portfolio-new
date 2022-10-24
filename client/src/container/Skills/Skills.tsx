@@ -8,12 +8,14 @@ import './Skills.scss';
 type Experience = {
   year: number;
   works: Work[];
+  _id: string;
 };
 
 type Work = {
   name: string;
   company: string;
   desc: string;
+  _key: string;
 };
 
 export default function Skills() {
@@ -34,6 +36,7 @@ export default function Skills() {
       setSkills(data);
     });
   }, []);
+  console.log(skills);
 
   return (
     <>
@@ -59,7 +62,7 @@ export default function Skills() {
         {/* Experiences */}
         <motion.div className="app__skills-exp">
           {experiences?.map((experience: Experience) => (
-            <motion.div className="app__skills-exp-item" key={experience.year}>
+            <motion.div className="app__skills-exp-item" key={experience._id}>
               <div className="app__skills-exp-year">
                 <p className="bold-text">{experience.year}</p>
               </div>
@@ -72,7 +75,7 @@ export default function Skills() {
                       className="app__skills-exp-work"
                       data-tip // useful for tooltip
                       data-for={work.name} // useful for tooltip
-                      key={work.name}
+                      key={work._key}
                     >
                       <h4 className="bold-text">{work.name}</h4>
                       <p className="p-text">{work.company}</p>
