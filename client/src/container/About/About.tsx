@@ -1,30 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 
-import './About.scss';
 import { urlFor, client } from '../../client';
-
-// type definition for about and education data
-type AboutType = {
-  title: string;
-  description: string;
-  imgUrl: string;
-};
-
-type EducationType = {
-  title: string;
-  year: string;
-  description: string;
-  imgUrl: string;
-};
-
-// get image url as string and create
+import type { IAbout, IEducation } from '../../types';
+import './About.scss';
 
 export default function About() {
   // contents for about section
-  const [abouts, setAbouts] = useState<AboutType[]>();
+  const [abouts, setAbouts] = useState<IAbout[]>();
   // contents for education section
-  const [educations, setEducations] = useState<EducationType[]>();
+  const [educations, setEducations] = useState<IEducation[]>();
 
   useEffect(() => {
     const aboutQuery = '*[_type == "abouts"]'; // query for about section
@@ -49,13 +34,13 @@ export default function About() {
       </h2>
       {/* Mapping over the about content */}
       <div className="app__profiles">
-        {abouts?.map((about: AboutType, index) => (
+        {abouts?.map((about: IAbout, index) => (
           <motion.div
             whileInView={{ opacity: 1 }}
             whileHover={{ scale: 1.1 }}
             transition={{ duration: 0.5, type: 'tween' }}
             className="app__profile-item"
-            key={about.title + index}
+            key={about._id}
           >
             <img src={urlFor(about.imgUrl)} alt={about.title} />
             <h2 className="bold-text" style={{ marginTop: 20 }}>
@@ -73,13 +58,13 @@ export default function About() {
       </h2>
       {/* Mapping over the Education content */}
       <div className="app__profiles">
-        {educations?.map((education: EducationType, index) => (
+        {educations?.map((education: IEducation, index) => (
           <motion.div
             whileInView={{ opacity: 1 }}
             whileHover={{ scale: 1.1 }}
             transition={{ duration: 0.5, type: 'tween' }}
             className="app__profile-item"
-            key={education.title + index}
+            key={education._id}
           >
             <img src={urlFor(education.imgUrl)} alt={education.title} />
             <h2 className="bold-text" style={{ marginTop: 20 }}>
