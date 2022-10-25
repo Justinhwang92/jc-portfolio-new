@@ -145,6 +145,16 @@
         height: 30px;
       }
     }
+
+    @media screen and (max-width: 500px) {
+      margin: 0.1rem;
+    }
+  }
+  @media screen and (max-width: 500px) {
+    position: fixed;
+    bottom: 0;
+    flex-direction: row;
+    padding: 0.5rem;
   }
 }
 
@@ -177,8 +187,7 @@
 }
 
 @media screen and (max-width: 500px) {
-  .app__navigation,
-  .app__social {
+  .app__navigation {
     display: none;
   }
 
