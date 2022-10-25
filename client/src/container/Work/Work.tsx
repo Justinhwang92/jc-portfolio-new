@@ -3,21 +3,12 @@ import { AiFillEye, AiFillGithub } from 'react-icons/ai';
 import { motion } from 'framer-motion';
 
 import { urlFor, client } from '../../client';
+import type { IProject } from '../../types';
 import './Work.scss';
 
-type WorkType = {
-  title: string;
-  description: string;
-  codeLink: string;
-  projectLink: string;
-  tags: string[];
-  imgUrl: string;
-  name: string;
-};
-
 export default function Work() {
-  const [works, setWorks] = useState([]);
-  const [filterWork, setFilterWork] = useState([]);
+  const [works, setWorks] = useState<IProject[]>();
+  const [filterWork, setFilterWork] = useState<IProject[]>();
   const [activeFilter, setActiveFilter] = useState('All');
   const [animateCard, setAnimateCard] = useState({ y: 0, opacity: 1 });
 
@@ -25,7 +16,7 @@ export default function Work() {
     const query = '*[_type == "works"]'; // works is the name of the collection in Sanity
 
     // Fetch data from Sanity
-    client.fetch(query).then((data) => {
+    client.fetch(query).then((data: IProject[]) => {
       setWorks(data);
       setFilterWork(data);
     });
@@ -43,7 +34,7 @@ export default function Work() {
         setFilterWork(works);
       } else {
         setFilterWork(
-          works.filter((work: WorkType) => work.tags.includes(item))
+          works?.filter((work: IProject) => work.tags.includes(item))
         );
       }
     }, 500);
@@ -85,8 +76,8 @@ export default function Work() {
         transition={{ duration: 0.5, delayChildren: 0.5 }}
         className="app__work-portfolio"
       >
-        {filterWork.map((work: WorkType, index: number) => (
-          <div className="app__work-item app__flex" key={index}>
+        {filterWork?.map((work: IProject, index: number) => (
+          <div className="app__work-item app__flex" key={work._id}>
             <div className="app__work-img app__flex">
               {/* Project image */}
               <img src={urlFor(work.imgUrl)} alt={work.name} />

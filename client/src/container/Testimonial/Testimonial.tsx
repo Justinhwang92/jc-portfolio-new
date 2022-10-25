@@ -4,24 +4,12 @@ import { motion } from 'framer-motion';
 import { HiChevronLeft, HiChevronRight } from 'react-icons/hi';
 
 import { urlFor, client } from '../../client';
+import type { ITestimonial, IBrand } from '../../types';
 import './Testimonial.scss';
 
-type TestimonialType = {
-  name: string;
-  company: string;
-  imgurl: string;
-  feedback: string;
-};
-
-type BrandType = {
-  _id: string;
-  name: string;
-  imgUrl: string;
-};
-
 export default function Testimonial() {
-  const [brands, setBrands] = useState<BrandType[]>();
-  const [testimonials, setTestimonials] = useState<TestimonialType[]>();
+  const [testimonials, setTestimonials] = useState<ITestimonial[]>();
+  const [brands, setBrands] = useState<IBrand[]>();
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const handleClick = (index: number) => {
@@ -33,12 +21,12 @@ export default function Testimonial() {
     const brandsQuery = '*[_type == "brands"]';
 
     // Fetch testimonials data from Sanity
-    client.fetch(testimonialsQuery).then((data: TestimonialType[]) => {
+    client.fetch(testimonialsQuery).then((data: ITestimonial[]) => {
       setTestimonials(data);
     });
 
     // Fetch brands data from Sanity
-    client.fetch(brandsQuery).then((data: BrandType[]) => {
+    client.fetch(brandsQuery).then((data: IBrand[]) => {
       setBrands(data);
     });
   }, []);
