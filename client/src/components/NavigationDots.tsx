@@ -14,7 +14,7 @@ export default function NavigationDots(prop: ActiveProp) {
             href={`#${item}`}
             key={item + index}
             className="app__navigation-dot"
-            style={prop.active === item ? { backgroundColor: '#313BAC' } : {}}
+            style={prop?.active === item ? { backgroundColor: '#313BAC' } : {}}
           />
         )
       )}
