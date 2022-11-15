@@ -2,6 +2,7 @@ import React, { ChangeEvent, useState } from 'react';
 
 import { images } from '../../constants';
 import { client } from '../../client';
+import { validateField } from '../../components/Validators';
 import './Footer.scss';
 
 export default function Footer() {
@@ -10,41 +11,55 @@ export default function Footer() {
   const [message, setMessage] = useState('');
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [nameValidation, setNameValidation] = useState('');
+  const [emailValidation, setEmailValidation] = useState('');
+  const [messageValidation, setMessageValidation] = useState('');
 
   const handleChangeNameInput = (e: ChangeEvent<HTMLInputElement>) => {
     const name = e.target.value;
+    setNameValidation(validateField('name', name));
     setName(name);
   };
 
   const handleChangeEmailInput = (e: ChangeEvent<HTMLInputElement>) => {
     const email = e.target.value;
+    setEmailValidation(validateField('email', email));
     setEmail(email);
   };
 
   const handleChangeMessageInput = (e: ChangeEvent<HTMLTextAreaElement>) => {
     const message = e.target.value;
+    setMessageValidation(validateField('message', message));
     setMessage(message);
   };
 
   const handleSubmit = () => {
-    setLoading(true);
+    if (
+      nameValidation !== 'valid' ||
+      emailValidation !== 'valid' ||
+      messageValidation !== 'valid'
+    ) {
+      console.log('error');
+    } else {
+      setLoading(true);
 
-    const contact = {
-      _type: 'contact',
-      name: name,
-      email: email,
-      message: message,
-    };
+      const contact = {
+        _type: 'contact',
+        name: name,
+        email: email,
+        message: message,
+      };
 
-    client
-      .create(contact)
-      .then(() => {
-        setLoading(false);
-        setIsFormSubmitted(true);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+      client
+        .create(contact)
+        .then(() => {
+          setLoading(false);
+          setIsFormSubmitted(true);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    }
   };
 
   return (
@@ -70,14 +85,14 @@ export default function Footer() {
             <input
               className="p-text"
               type="text"
-              placeholder="Your Name"
+              placeholder="Your Name *"
               value={name}
               onChange={handleChangeNameInput}
             />
             <input
               className="p-text"
               type="text"
-              placeholder="Your Email"
+              placeholder="Your Email *"
               value={email}
               onChange={handleChangeEmailInput}
             />
@@ -85,12 +100,15 @@ export default function Footer() {
           <div>
             <textarea
               className="p-text"
-              placeholder="Your Message"
+              placeholder="Your Message *"
               value={message}
               name={message}
               onChange={handleChangeMessageInput}
             />
           </div>
+          {nameValidation !== 'valid' && <h3>{nameValidation}</h3>}
+          {emailValidation !== 'valid' && <h3>{emailValidation}</h3>}
+          {messageValidation !== 'valid' && <h3>{messageValidation}</h3>}
           <button type="button" className="p-text" onClick={handleSubmit}>
             {loading ? 'Sending' : 'Send Message'}
           </button>

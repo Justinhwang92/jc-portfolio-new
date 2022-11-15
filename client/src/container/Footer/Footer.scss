@@ -71,6 +71,12 @@
   flex-direction: column;
   margin: 1rem 2rem;
 
+  h3 {
+    border-radius: 4px;
+    font-size: 14px;
+    color: red;
+  }
+
   div {
     width: 100%;
 
